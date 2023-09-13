@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spotify Movie Playlist Search</title>
+</head>
+<body>
+    <input type="text" id="movieName" placeholder="Enter movie name">
+    <button onclick="search()">Search</button>
+
+    <ul id="results"></ul>
+
+    <script>
+        async function search() {
+            const movieName = document.getElementById('movieName').value;
+            const response = await fetch(`/search?movie=${movieName}`);
+            const data = await response.json();
+
+            const resultsElement = document.getElementById('results');
+            resultsElement.innerHTML = '';
+
+            for (let playlist of data.playlists.items) {
+                const li = document.createElement('li');
+                li.textContent = playlist.name;
+                resultsElement.appendChild(li);
+            }
+        }
+    </script>
+</body>
+</html>
