@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Spotify Movie Playlist Search</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <input type="text" id="movieName" placeholder="Enter movie name">
@@ -16,16 +17,21 @@
             const movieName = document.getElementById('movieName').value;
             const response = await fetch(`/search?movie=${movieName}`);
             const data = await response.json();
-
+        
             const resultsElement = document.getElementById('results');
             resultsElement.innerHTML = '';
-
+        
             for (let playlist of data.playlists.items) {
                 const li = document.createElement('li');
-                li.textContent = playlist.name;
+                const a = document.createElement('a');
+                a.href = playlist.external_urls.spotify; // This is the direct link to the Spotify playlist
+                a.target = "_blank"; // This makes the link open in a new tab
+                a.textContent = playlist.name;
+                li.appendChild(a);
                 resultsElement.appendChild(li);
             }
         }
+        
     </script>
 </body>
 </html>
