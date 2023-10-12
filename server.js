@@ -1,10 +1,12 @@
 const express = require('express');
 const axios = require('axios');
+const cors = require('cors');
 
 const app = express();
 const PORT = 3000;
 
-app.use(express.static('public')); // Serve static files from the 'public' directory
+//app.use(express.static('public')); // Serve static files from the 'public' directory
+app.use(cors());
 
 app.get('/search', async (req, res) => {
     const movieName = req.query.movie;
