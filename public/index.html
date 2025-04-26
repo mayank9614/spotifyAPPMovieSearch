@@ -1,40 +1,80 @@
-html
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Spotify Movie Playlist Search</title>
-  <link rel="stylesheet" href="styles.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spotify Movie Playlists</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
-  <input type="text" id="movieName" placeholder="Enter movie name">
-  <button onclick="search()">Search</button>
-  <ul id="results"></ul>
-  <script>
-    async function search() {
-      try {
-        const movieName = document.getElementById('movieName').value;
-        const response = await fetch(`/search?movie=${movieName}`);
-        if (!response.ok) {
-          throw new Error('Failed to fetch data from Spotify');
-        }
-        const data = await response.json();
-        const resultsElement = document.getElementById('results');
-        resultsElement.innerHTML = '';
-        for (let playlist of data.playlists.items) {
-          const li = document.createElement('li');
-          const a = document.createElement('a');
-          a.href = playlist.external_urls.spotify;
-          a.target = "_blank";
-          a.textContent = playlist.name;
-          li.appendChild(a);
-          resultsElement.appendChild(li);
-        }
-      } catch (error) {
-        console.error('Error:', error);
-      }
-    }
-  </script>
+    <div class="app-container">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <div class="logo">
+                <img src="https://storage.googleapis.com/pr-newsroom-wp/1/2018/11/Spotify_Logo_RGB_White.png" alt="Spotify Logo">
+            </div>
+            <ul class="nav-links">
+                <li class="active"><i class="fas fa-home"></i> Home</li>
+                <li><i class="fas fa-search"></i> Search</li>
+                <li><i class="fas fa-book"></i> Your Library</li>
+            </ul>
+            <div class="sidebar-info">
+                <p>Find movie soundtracks and themed playlists</p>
+                <div class="sidebar-footer">
+                    <span>© 2025 Spotify Movie Search</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <div class="topbar">
+                <div class="user-info">
+                    <div class="user-avatar">
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <span>Movie Playlist Explorer</span>
+                </div>
+            </div>
+
+            <div class="content-container">
+                <div class="search-container">
+                    <h1>Find Movie Playlists</h1>
+                    <p class="search-description">Enter a movie name to discover related playlists on Spotify</p>
+                    
+                    <div class="search-box">
+                        <i class="fas fa-search search-icon"></i>
+                        <input type="text" id="movieName" placeholder="Enter movie name (e.g., Avengers, Star Wars, Titanic)">
+                        <button id="searchBtn">Search</button>
+                    </div>
+                </div>
+
+                <div class="results-container">
+                    <div class="loading-indicator" id="loadingIndicator">
+                        <div class="spinner"></div>
+                        <p>Searching Spotify...</p>
+                    </div>
+                    
+                    <div class="results-header" id="resultsHeader">
+                        <h2>Playlists for "<span id="searchTerm"></span>"</h2>
+                    </div>
+                    
+                    <div class="playlists-grid" id="results">
+                        <!-- Playlist cards will be inserted here -->
+                    </div>
+                    
+                    <div class="no-results" id="noResults">
+                        <i class="fas fa-music"></i>
+                        <h3>No playlists found</h3>
+                        <p>Try another movie name or check your spelling</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
 </body>
 </html>
