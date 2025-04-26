@@ -48,8 +48,7 @@ This application is built with:
 ## API Configuration
 
 The application uses the Spotify Web API with the following credentials:
-- Client ID: `cd73ebdde5714a1cb42331c146cdb96e`
-- Client Secret: `afde5bb5a16049d885aa13e93f5187de`
+
 
 If you need to use your own Spotify API credentials:
 1. Create a Spotify Developer account at [developer.spotify.com](https://developer.spotify.com)
