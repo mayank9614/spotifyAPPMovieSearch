@@ -9,7 +9,7 @@ A modern application to search for movie playlists on Spotify with a sleek, Spot
 - Responsive design that works on desktop and mobile devices
 - Recent searches history
 - Error handling with user-friendly messages
-- Playlist cards with play button overlays
+
 - Loading animations and visual feedback
 
 ## Technical Details
